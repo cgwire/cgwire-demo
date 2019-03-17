@@ -1,13 +1,13 @@
 import os
 import gazu
 
-gazu.set_host("http://localhost/api")
-gazu.log_in("admin@example.com", "default")
+gazu.set_host("https://localhost/api")
+
+gazu.log_in("admin@example.com", "mysecretpassword")
 
 bbb = gazu.project.new_project("Big Buck Bunny")
 agent327 = gazu.project.new_project("Agent 327")
 caminandes = gazu.project.new_project("Caminandes", production_type="tvshow")
-
 characters = gazu.asset.new_asset_type("Characters")
 props = gazu.asset.new_asset_type("Props")
 environment = gazu.asset.new_asset_type("Environment")
@@ -94,11 +94,11 @@ for episode_name in ["E03"]:
             )
 
 modeling = gazu.task.get_task_type_by_name("Modeling")
-setup = gazu.task.get_task_type_by_name("Setup")
+setup = gazu.task.get_task_type_by_name("Rigging")
 storyboard = gazu.task.get_task_type_by_name("Storyboard")
 layout = gazu.task.get_task_type_by_name("Layout")
 animation = gazu.task.get_task_type_by_name("Animation")
-render = gazu.task.get_task_type_by_name("Render")
+render = gazu.task.get_task_type_by_name("Rendering")
 compositing = gazu.task.get_task_type_by_name("Compositing")
 
 for asset in assets:
@@ -140,7 +140,7 @@ gazu.client.upload(
    "fixtures/v1.png"
 )
 
-'''persons = [
+persons = [
     {
         "first_name": "Alicia",
         "last_name": "Cooper",
@@ -194,7 +194,7 @@ gazu.client.upload(
         "last_name": "Rousseau",
         "email": "frank@cg-wire.com",
         "phone": "+33 6 07 08 95 78",
-        "role": "user",
+        "role": "admin",
         "name": "frank"
     }
 ]
@@ -208,7 +208,6 @@ for person in persons:
         person["role"]
     )
     gazu.person.set_avatar(personfull, "fixtures/fake_user/%s.png" % person["name"])
-'''
 
 file_paths_modeling = [
     "fixtures/th_assets/lama.png",
