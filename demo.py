@@ -1,7 +1,7 @@
 import os
 import gazu
 
-gazu.set_host("https://localhost/api")
+gazu.set_host("http://localhost/api")
 
 gazu.log_in("admin@example.com", "mysecretpassword")
 
@@ -193,7 +193,7 @@ persons = [
         "first_name": "Frank",
         "last_name": "Rousseau",
         "email": "frank@cg-wire.com",
-        "phone": "+33 6 07 08 95 78",
+        "phone": "+33 6 22 18 13 88",
         "role": "admin",
         "name": "frank"
     }
