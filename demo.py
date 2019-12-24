@@ -130,10 +130,10 @@ casting = [
         "nb_occurences": 2
     }
 ]
-gazu.shot.update_casting(shots[0], casting)
-gazu.shot.update_casting(shots[1], casting)
-gazu.shot.update_casting(shots[2], casting)
-gazu.shot.update_casting(shots[3], casting)
+gazu.casting.update_shot_casting(caminandes, shots[0], casting)
+gazu.casting.update_shot_casting(caminandes, shots[1], casting)
+gazu.casting.update_shot_casting(caminandes, shots[2], casting)
+gazu.casting.update_shot_casting(caminandes, shots[3], casting)
 
 gazu.client.upload(
    "/pictures/thumbnails/projects/%s" % caminandes["id"],
