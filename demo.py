@@ -112,12 +112,15 @@ for (asset_type, asset_name) in asset_desc:
         gazu.asset.new_asset(caminandes, asset_type, asset_name)
     )
 
+sequences = []
+
 for episode_name in ["E01"]:
     episode = gazu.shot.new_episode(caminandes, episode_name)
 
     for sequence_name in ["SE01", "SE02", "SE03"]:
         sequence = gazu.shot.new_sequence(
-            caminandes, episode, sequence_name)
+            caminandes, sequence_name, episode=episode)
+        sequences.append(sequence)
 
         for shot_name in [
             "SH001",
@@ -133,18 +136,34 @@ for episode_name in ["E01"]:
             "SH011"
         ]:
             shots.append(
-                gazu.shot.new_shot(caminandes, sequence, shot_name)
+                gazu.shot.new_shot(
+                    caminandes,
+                    sequence,
+                    shot_name,
+                    nb_frames=random.randrange(20, 90, 1)
+                )
             )
+
+
 for episode_name in ["E02"]:
     episode = gazu.shot.new_episode(caminandes, episode_name)
 
     for sequence_name in ["SE01", "SE02"]:
         sequence = gazu.shot.new_sequence(
-            caminandes, episode, sequence_name)
+            caminandes,
+            sequence_name,
+            episode=episode
+        )
+        sequences.append(sequence)
 
         for shot_name in ["SH001", "SH002", "SH003"]:
             shots.append(
-                gazu.shot.new_shot(caminandes, sequence, shot_name)
+                gazu.shot.new_shot(
+                    caminandes,
+                    sequence,
+                    shot_name,
+                    nb_frames=random.randrange(20, 90, 1)
+                )
             )
 
 for episode_name in ["E03"]:
@@ -152,7 +171,8 @@ for episode_name in ["E03"]:
 
     for sequence_name in ["SE01", "SE02", "SE03"]:
         sequence = gazu.shot.new_sequence(
-            caminandes, episode, sequence_name)
+            caminandes, sequence_name, episode=episode)
+        sequences.append(sequence)
 
         for shot_name in [
             "SH001",
@@ -164,7 +184,12 @@ for episode_name in ["E03"]:
             "SH007"
         ]:
             shots.append(
-                gazu.shot.new_shot(caminandes, sequence, shot_name)
+                gazu.shot.new_shot(
+                    caminandes,
+                    sequence,
+                    shot_name,
+                    nb_frames=random.randrange(20, 90, 1)
+                )
             )
 
 modeling = gazu.task.get_task_type_by_name("Modeling")
@@ -181,9 +206,17 @@ for asset in assets:
 
 for shot in shots:
     gazu.task.new_task(shot, storyboard)
-    gazu.task.new_task(shot, animation)
     gazu.task.new_task(shot, render)
     gazu.task.new_task(shot, compositing)
+
+    animation_task = gazu.task.new_task(shot, animation)
+    if shot["parent_id"] == sequences[0]["id"]:
+        gazu.task.assign_task(animation_task, alicia)
+    if shot["parent_id"] == sequences[1]["id"]:
+        gazu.task.assign_task(animation_task, brennan)
+    if shot["parent_id"] == sequences[2]["id"]:
+        gazu.task.assign_task(animation_task, david)
+
 
 lama = gazu.asset.get_asset_by_name(caminandes, "Lama")
 pingoo = gazu.asset.get_asset_by_name(caminandes, "Pingoo")
