@@ -1,9 +1,83 @@
 import os
+import random
 import gazu
 
-gazu.set_host("http://localhost/api")
+gazu.set_host("http://localhost:8080/api")
 
 gazu.log_in("admin@example.com", "mysecretpassword")
+
+persons = [
+    {
+        "first_name": "Alicia",
+        "last_name": "Cooper",
+        "email": "alicia@cg-wire.com",
+        "phone": "+33 6 82 38 19 08",
+        "role": "user",
+        "name": "alicia"
+    },
+    {
+        "first_name": "Michael",
+        "last_name": "Byrd",
+        "email": "michael@cg-wire.com",
+        "phone": "+33 6 32 45 12 45",
+        "role": "user",
+        "name": "michael"
+    },
+    {
+        "first_name": "Ann",
+        "last_name": "Kennedy",
+        "email": "ann@cg-wire.com",
+        "phone": "+33 6 32 45 12 45",
+        "role": "user",
+        "name": "ann"
+    },
+    {
+        "first_name": "Brennan",
+        "last_name": "Mason",
+        "email": "brennan@cg-wire.com",
+        "phone": "+33 6 43 42 13 21",
+        "role": "user",
+        "name": "brennan"
+    },
+    {
+        "first_name": "David",
+        "last_name": "Penna",
+        "email": "david@cg-wire.com",
+        "phone": "+33 6 08 98 92 12",
+        "role": "user",
+        "name": "david"
+    },
+    {
+        "first_name": "Rachel",
+        "last_name": "Shelton",
+        "email": "rachel@cg-wire.com",
+        "phone": "+33 6 92 38 91 23",
+        "role": "user",
+        "name": "rachel"
+    },
+    {
+        "first_name": "Frank",
+        "last_name": "Rousseau",
+        "email": "frank@cg-wire.com",
+        "phone": "+33 6 22 18 13 88",
+        "role": "admin",
+        "name": "frank"
+    }
+]
+
+for person in persons:
+    personfull = gazu.person.new_person(
+        person["first_name"],
+        person["last_name"],
+        person["email"],
+        person["phone"],
+        person["role"]
+    )
+    gazu.person.set_avatar(personfull, "fixtures/fake_user/%s.png" % person["name"])
+
+alicia = gazu.person.get_person_by_full_name("Alicia Cooper")
+brennan = gazu.person.get_person_by_full_name("Brennan Mason")
+david = gazu.person.get_person_by_full_name("David Penna")
 
 bbb = gazu.project.new_project("Big Buck Bunny")
 agent327 = gazu.project.new_project("Agent 327")
@@ -139,75 +213,6 @@ gazu.client.upload(
    "/pictures/thumbnails/projects/%s" % caminandes["id"],
    "fixtures/v1.png"
 )
-
-persons = [
-    {
-        "first_name": "Alicia",
-        "last_name": "Cooper",
-        "email": "alicia@cg-wire.com",
-        "phone": "+33 6 82 38 19 08",
-        "role": "user",
-        "name": "alicia"
-    },
-    {
-        "first_name": "Michael",
-        "last_name": "Byrd",
-        "email": "michael@cg-wire.com",
-        "phone": "+33 6 32 45 12 45",
-        "role": "user",
-        "name": "michael"
-    },
-    {
-        "first_name": "Ann",
-        "last_name": "Kennedy",
-        "email": "ann@cg-wire.com",
-        "phone": "+33 6 32 45 12 45",
-        "role": "user",
-        "name": "ann"
-    },
-    {
-        "first_name": "Brennan",
-        "last_name": "Mason",
-        "email": "brennan@cg-wire.com",
-        "phone": "+33 6 43 42 13 21",
-        "role": "user",
-        "name": "brennan"
-    },
-    {
-        "first_name": "David",
-        "last_name": "Penna",
-        "email": "david@cg-wire.com",
-        "phone": "+33 6 08 98 92 12",
-        "role": "user",
-        "name": "david"
-    },
-    {
-        "first_name": "Rachel",
-        "last_name": "Shelton",
-        "email": "rachel@cg-wire.com",
-        "phone": "+33 6 92 38 91 23",
-        "role": "user",
-        "name": "rachel"
-    },
-    {
-        "first_name": "Frank",
-        "last_name": "Rousseau",
-        "email": "frank@cg-wire.com",
-        "phone": "+33 6 22 18 13 88",
-        "role": "admin",
-        "name": "frank"
-    }
-]
-
-for person in persons:
-    personfull = gazu.person.new_person(
-        person["first_name"],
-        person["last_name"],
-        person["email"],
-        person["phone"],
-        person["role"]
-    )
-    gazu.person.set_avatar(personfull, "fixtures/fake_user/%s.png" % person["name"])
 
 file_paths_modeling = [
     "fixtures/th_assets/lama.png",
