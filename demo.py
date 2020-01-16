@@ -373,6 +373,24 @@ file_paths_render = [
     "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE03_SH11.png",
 ]
 
+movie_file_paths_animation = [
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH01.mp4",
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH02.mp4",
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH03.mp4",
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH04.mp4",
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH05.mp4",
+    "fixtures/th_shots/ep01/Anim/caminandes_llamigos_E01_SE01_SH06.mp4",
+]
+
+movie_file_paths_render = [
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH01.mp4",
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH02.mp4",
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH03.mp4",
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH04.mp4",
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH05.mp4",
+    "fixtures/th_shots/ep01/render/caminandes_llamigos_E01_SE01_SH06.mp4",
+]
+
 done = gazu.task.get_task_status_by_name("Done")
 wfa = gazu.task.get_task_status_by_name("Waiting For Approval")
 wip = gazu.task.get_task_status_by_name("Work In Progress")
@@ -427,4 +445,27 @@ for (index, shot) in enumerate(shots):
             file_paths_render[index]
         )
         gazu.task.set_main_preview(shot, preview_file)
+        comment = gazu.task.add_comment(task_render, done, "Done")
+
+    if index < len(movie_file_paths_animation) and \
+       os.path.exists(movie_file_paths_animation[index]):
+        task_animation = gazu.task.get_task_by_name(shot, animation)
+        comment = gazu.task.add_comment(task_animation, wfa, "New preview")
+        preview_file = gazu.task.add_preview(
+            task_animation,
+            comment,
+            movie_file_paths_animation[index]
+        )
+        comment = gazu.task.add_comment(task_animation, done, "Done")
+
+
+    if index < len(movie_file_paths_render) and \
+       os.path.exists(movie_file_paths_render[index]):
+        task_render = gazu.task.get_task_by_name(shot, render)
+        comment = gazu.task.add_comment(task_render, wfa, "New preview")
+        preview_file = gazu.task.add_preview(
+            task_render,
+            comment,
+            movie_file_paths_render[index]
+        )
         comment = gazu.task.add_comment(task_render, done, "Done")
