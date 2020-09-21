@@ -2,7 +2,7 @@ import os
 import random
 import gazu
 
-gazu.set_host("http://localhost:8080/api")
+gazu.set_host("http://localhost/api")
 
 gazu.log_in("admin@example.com", "mysecretpassword")
 
@@ -405,7 +405,7 @@ for (index, asset) in enumerate(assets):
             comment,
             file_paths_modeling[index]
         )
-        gazu.task.set_main_preview(asset, preview_file)
+        gazu.task.set_main_preview(preview_file)
         comment = gazu.task.add_comment(task_modeling, done, "Done")
         task_setup = gazu.task.get_task_by_name(asset, setup)
         comment = gazu.task.add_comment(task_setup, wip, "Getting started")
@@ -420,7 +420,7 @@ for (index, shot) in enumerate(shots):
             comment,
             file_paths_sb[index]
         )
-        gazu.task.set_main_preview(shot, preview_file)
+        gazu.task.set_main_preview(preview_file)
         comment = gazu.task.add_comment(task_sb, done, "Done")
 
     if index < len(file_paths_animation) and \
@@ -432,7 +432,7 @@ for (index, shot) in enumerate(shots):
             comment,
             file_paths_animation[index]
         )
-        gazu.task.set_main_preview(shot, preview_file)
+        gazu.task.set_main_preview(preview_file)
         comment = gazu.task.add_comment(task_animation, done, "Done")
 
     if index < len(file_paths_render) and \
@@ -444,7 +444,7 @@ for (index, shot) in enumerate(shots):
             comment,
             file_paths_render[index]
         )
-        gazu.task.set_main_preview(shot, preview_file)
+        gazu.task.set_main_preview(preview_file)
         comment = gazu.task.add_comment(task_render, done, "Done")
 
     if index < len(movie_file_paths_animation) and \
