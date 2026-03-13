@@ -396,7 +396,7 @@ wfa = gazu.task.get_task_status_by_name("Waiting For Approval")
 wip = gazu.task.get_task_status_by_name("Work In Progress")
 
 for (index, asset) in enumerate(assets):
-    task_modeling = gazu.task.get_task_by_name(asset, modeling)
+    task_modeling = gazu.task.get_task_by_entity(asset, modeling)
     if index < len(file_paths_modeling) and \
        os.path.exists(file_paths_modeling[index]):
         comment = gazu.task.add_comment(task_modeling, wfa, "New preview")
@@ -407,13 +407,13 @@ for (index, asset) in enumerate(assets):
         )
         gazu.task.set_main_preview(preview_file)
         comment = gazu.task.add_comment(task_modeling, done, "Done")
-        task_setup = gazu.task.get_task_by_name(asset, setup)
+        task_setup = gazu.task.get_task_by_entity(asset, setup)
         comment = gazu.task.add_comment(task_setup, wip, "Getting started")
 
 for (index, shot) in enumerate(shots):
     if index < len(file_paths_sb) and \
        os.path.exists(file_paths_sb[index]):
-        task_sb = gazu.task.get_task_by_name(shot, storyboard)
+        task_sb = gazu.task.get_task_by_entity(shot, storyboard)
         comment = gazu.task.add_comment(task_sb, wfa, "New preview")
         preview_file = gazu.task.add_preview(
             task_sb,
@@ -425,7 +425,7 @@ for (index, shot) in enumerate(shots):
 
     if index < len(file_paths_animation) and \
        os.path.exists(file_paths_animation[index]):
-        task_animation = gazu.task.get_task_by_name(shot, animation)
+        task_animation = gazu.task.get_task_by_entity(shot, animation)
         comment = gazu.task.add_comment(task_animation, wfa, "New preview")
         preview_file = gazu.task.add_preview(
             task_animation,
@@ -437,7 +437,7 @@ for (index, shot) in enumerate(shots):
 
     if index < len(file_paths_render) and \
        os.path.exists(file_paths_render[index]):
-        task_render = gazu.task.get_task_by_name(shot, render)
+        task_render = gazu.task.get_task_by_entity(shot, render)
         comment = gazu.task.add_comment(task_render, wfa, "New preview")
         preview_file = gazu.task.add_preview(
             task_render,
@@ -449,7 +449,7 @@ for (index, shot) in enumerate(shots):
 
     if index < len(movie_file_paths_animation) and \
        os.path.exists(movie_file_paths_animation[index]):
-        task_animation = gazu.task.get_task_by_name(shot, animation)
+        task_animation = gazu.task.get_task_by_entity(shot, animation)
         comment = gazu.task.add_comment(task_animation, wfa, "New preview")
         preview_file = gazu.task.add_preview(
             task_animation,
@@ -461,7 +461,7 @@ for (index, shot) in enumerate(shots):
 
     if index < len(movie_file_paths_render) and \
        os.path.exists(movie_file_paths_render[index]):
-        task_render = gazu.task.get_task_by_name(shot, render)
+        task_render = gazu.task.get_task_by_entity(shot, render)
         comment = gazu.task.add_comment(task_render, wfa, "New preview")
         preview_file = gazu.task.add_preview(
             task_render,
